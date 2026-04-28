@@ -11,7 +11,7 @@ export class TaskService {
 
   constructor(private http: HttpClient) {}
 
-  // 📥 جلب المهام حسب المشروع
+  // جلب المهام حسب المشروع
   getTasksByProject(projectId: number) {
     return this.http.get(`${this.apiUrl}?project_id=${projectId}`);
   }

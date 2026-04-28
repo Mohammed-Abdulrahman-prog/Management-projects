@@ -9,15 +9,12 @@ require "config/db.php";
 $method = $_SERVER['REQUEST_METHOD'];
 $data = json_decode(file_get_contents("php://input"), true);
 
-// مهم للـ CORS
 if ($method == 'OPTIONS') {
     http_response_code(200);
     exit();
 }
 
-/////////////////////////
-// 📥 GET → عرض المهام
-/////////////////////////
+// GET → عرض المهام
 if ($method == "GET") {
 
     if (!isset($_GET['project_id'])) {
@@ -37,14 +34,12 @@ if ($method == "GET") {
     exit;
 }
 
-/////////////////////////
-// 📦 POST → كل العمليات
-/////////////////////////
+//  POST  كل العمليات
 if ($method == "POST") {
 
     $action = $data['action'] ?? '';
 
-    // ➕ إضافة
+    // إضافة
     if ($action == "create") {
 
         $stmt = $conn->prepare("
@@ -66,7 +61,7 @@ if ($method == "POST") {
         exit;
     }
 
-    // ✏️ تعديل
+    // تعديل
     if ($action == "update") {
 
         $stmt = $conn->prepare("
@@ -86,7 +81,7 @@ if ($method == "POST") {
         exit;
     }
 
-    // 🗑 حذف
+    // حذف
     if ($action == "delete") {
 
         $stmt = $conn->prepare("DELETE FROM tasks WHERE id=?");
@@ -96,7 +91,7 @@ if ($method == "POST") {
         exit;
     }
 
-    // ❌ لو action غير معروف
+    //  action غير معروف
     echo json_encode([
         "status" => "error",
         "message" => "Invalid action"

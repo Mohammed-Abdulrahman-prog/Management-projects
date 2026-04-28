@@ -14,29 +14,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     exit();
 }
 
-// =====================
-// GET → عرض
-// =====================
+// GET عرض
 if ($method == "GET") {
     $stmt = $conn->prepare("
     SELECT p.*, 
            (SELECT COUNT(*) FROM tasks t WHERE t.project_id = p.id) AS taskCount
     FROM projects p
     ORDER BY p.id DESC");
-    // $stmt = $conn->prepare("SELECT * FROM projects ORDER BY id DESC");
     $stmt->execute();
     echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
     exit;   
 }
 
-// =====================
-// POST → كل العمليات
-// =====================
+// POST كل العمليات
 if ($method == "POST") {
 
     $action = $data['action'] ?? '';
 
-    // ➕ إضافة
+    // إضافة
     if ($action == "create") {
         $stmt = $conn->prepare("INSERT INTO projects (name, description) VALUES (?, ?)");
         $stmt->execute([$data['name'], $data['description']]);
@@ -44,7 +39,7 @@ if ($method == "POST") {
         exit;
     }
 
-    // ✏️ تعديل
+    // تعديل
     if ($action == "update") {
         $stmt = $conn->prepare("UPDATE projects SET name=?, description=? WHERE id=?");
         $stmt->execute([$data['name'], $data['description'], $data['id']]);
@@ -52,7 +47,7 @@ if ($method == "POST") {
         exit;
     }
 
-    // 🗑 حذف
+    // حذف
     if ($action == "delete") {
         try {
             $stmt = $conn->prepare("DELETE FROM projects WHERE id=?");
