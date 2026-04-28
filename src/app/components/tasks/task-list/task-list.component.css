@@ -1,0 +1,121 @@
+.container {
+  width: 600px;
+  margin: auto;
+  font-family: Arial;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 10px;
+  background: #fafafa;
+}
+
+.task-info h3 {
+  margin: 0;
+}
+
+.task-info p {
+  margin: 5px 0;
+  color: #555;
+}
+
+.status {
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.pending {
+  background: #ffe5b4;
+  color: #cc7a00;
+}
+
+.done {
+  background: #cce5ff;
+  color: #0066cc;
+}
+
+.completed {
+  background: #d4edda;
+  color: #155724;
+}
+
+.btn {
+  border: none;
+  padding: 6px 10px;
+  margin: 2px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.add {
+  background: #28a745;
+  color: white;
+}
+
+.edit {
+  background: #ffc107;
+}
+
+.delete {
+  background: #dc3545;
+  color: white;
+}
+
+.save {
+  background: #28a745;
+  color: white;
+}
+
+.cancel {
+  background: #6c757d;
+  color: white;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+  background: white;
+  width: 350px;
+  margin: 100px auto;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+input, textarea, select {
+  width: 100%;
+  margin: 5px 0;
+  padding: 8px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.loading {
+  color: blue;
+}
+
+.empty {
+  color: gray;
+}

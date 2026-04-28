@@ -1,0 +1,61 @@
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <h2>قائمة المشاريع</h2>
+    <button class="btn add" (click)="openAddForm()">+ إضافة مشروع</button>
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="loading">
+    جاري التحميل...
+  </div>
+
+  <!-- Empty -->
+  <div *ngIf="!loading && projects.length === 0" class="empty">
+    لا توجد مشاريع
+  </div>
+
+  <!-- List -->
+  <div *ngFor="let p of projects; trackBy: trackById" class="card">
+
+    <!-- Info -->
+    <div class="project-info" (click)="goToTasks(p)">
+      <h3>{{ p.name }}</h3>
+      <p>{{ p.description }}</p>
+    </div>
+
+    <!-- الاحداث -->
+    <div class="actions">
+      <button class="btn edit" (click)="updateProject(p)">✏️</button>
+      <!-- <button class="btn delete" (click)="deleteProject(p.id)">🗑</button> -->
+      <button 
+        (click)="deleteProject(p.id)" 
+        [disabled]="p.taskCount > 0"
+        [title]="p.taskCount > 0 ? 'لا يمكن حذف المشروع لأنه يحتوي على مهام' : ''">
+        🗑
+      </button>
+    </div>
+
+  </div>
+
+</div>
+
+<!--  Modal -->
+
+<div class="modal" *ngIf="showModal">
+  <div class="modal-content">
+
+    <h3>{{ isEdit ? '✏️ تعديل مشروع' : '➕ إضافة مشروع' }}</h3>
+
+    <input [(ngModel)]="form.name" placeholder="اسم المشروع">
+
+    <textarea [(ngModel)]="form.description" placeholder="الوصف"></textarea>
+
+    <div class="modal-actions">
+      <button class="btn save" (click)="saveProject()">💾 حفظ</button>
+      <button class="btn cancel" (click)="closeModal()">❌ إلغاء</button>
+    </div>
+
+  </div>
+</div>

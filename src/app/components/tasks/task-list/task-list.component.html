@@ -1,0 +1,68 @@
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <h2>قائمة المهام</h2>
+    <button class="btn add" (click)="openAddTask()">+ إضافة مهمة</button>
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="loading">
+    جاري التحميل...
+  </div>
+
+  <!-- Empty -->
+  <div *ngIf="!loading && tasks.length === 0" class="empty">
+    لا توجد مهام
+  </div>
+
+  <!-- List -->
+  <div *ngFor="let t of tasks" class="card">
+
+    <div class="task-info">
+      <h3>{{ t.title }}</h3>
+      <p>{{ t.description }}</p>
+
+      <span class="status"
+        [ngClass]="{
+          'pending': t.status === 'pending',
+          'done': t.status === 'done',
+          'completed': t.status === 'completed'
+        }">
+        {{ t.status }}
+      </span>
+    </div>
+
+    <div class="actions">
+      <button class="btn edit" (click)="editTask(t)">✏️</button>
+      <button class="btn delete" (click)="deleteTask(t.id)">🗑</button>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Modal -->
+
+<div class="modal" *ngIf="showModal">
+  <div class="modal-content">
+
+    <h3>{{ isEdit ? '✏️ تعديل مهمة' : '➕ إضافة مهمة' }}</h3>
+
+    <input [(ngModel)]="form.title" placeholder="عنوان المهمة">
+
+    <textarea [(ngModel)]="form.description" placeholder="الوصف"></textarea>
+
+    <select [(ngModel)]="form.status">
+      <option value="pending">Pending</option>
+      <option value="in_progress">in_progress </option>
+      <option value="completed">Completed</option>
+    </select>
+
+    <div class="modal-actions">
+      <button class="btn save" (click)="saveTask()">💾 حفظ</button>
+      <button class="btn cancel" (click)="closeModal()">❌ إلغاء</button>
+    </div>
+
+  </div>
+</div>

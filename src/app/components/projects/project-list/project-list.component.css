@@ -1,0 +1,109 @@
+.container {
+  width: 650px;
+  margin: auto;
+  font-family: Arial;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin: 12px 0;
+  border-radius: 10px;
+  background: #fafafa;
+  transition: 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.01);
+}
+
+.project-info {
+  cursor: pointer;
+}
+
+.project-info h3 {
+  margin: 0;
+}
+
+.project-info p {
+  margin: 5px 0;
+  color: #666;
+}
+
+.btn {
+  border: none;
+  padding: 6px 10px;
+  margin: 2px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.add {
+  background: #28a745;
+  color: white;
+}
+
+.edit {
+  background: #ffc107;
+}
+
+.delete {
+  background: #dc3545;
+  color: white;
+}
+
+.save {
+  background: #28a745;
+  color: white;
+}
+
+.cancel {
+  background: #6c757d;
+  color: white;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+  background: white;
+  width: 350px;
+  margin: 100px auto;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+input, textarea {
+  width: 100%;
+  margin: 5px 0;
+  padding: 8px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.loading {
+  color: blue;
+}
+
+.empty {
+  color: gray;
+}
