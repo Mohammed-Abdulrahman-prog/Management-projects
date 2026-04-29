@@ -18,6 +18,8 @@ export class TaskListComponent implements OnInit {
   tasks: any[] = [];
   loading = false;
   projectId: number = 0;
+  filteredTasks: any[] = [];
+  selectedStatus: string = 'all';
 
   showModal = false;
   isEdit = false;
@@ -40,21 +42,33 @@ export class TaskListComponent implements OnInit {
     this.loadTasks();
   }
 
-  // تحميل المهام
-  loadTasks() {
-    this.loading = true;
-    this.taskService.getTasksByProject(this.projectId).subscribe({
-      next: (res: any) => {
-        this.tasks = res;
-        this.loading = false;
-        this.cdr.detectChanges();
-      },
-      error: () => {
-        this.loading = false;
-        alert('خطأ في تحميل المهام');
-      }
-    });
+  // لفلترة بحسب حالة المهام
+  applyFilter() {
+  if (this.selectedStatus === 'all') {
+    this.filteredTasks = this.tasks;
+  } else {
+    this.filteredTasks = this.tasks.filter(
+      t => t.status === this.selectedStatus
+    );
   }
+}
+  // تحميل 
+  loadTasks() {
+  this.loading = true;
+
+  this.taskService.getTasksByProject(this.projectId).subscribe({
+    next: (res: any) => {
+      this.tasks = res;
+      this.applyFilter(); 
+      this.loading = false;
+      this.cdr.detectChanges();
+    },
+    error: () => {
+      this.loading = false;
+      alert('خطأ في تحميل المهام');
+    }
+  });
+}
 
   // فتح إضافة
   openAddTask() {

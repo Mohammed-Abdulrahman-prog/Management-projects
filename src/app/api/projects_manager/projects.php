@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     exit();
 }
 
-// GET عرض
+
 if ($method == "GET") {
     $stmt = $conn->prepare("
     SELECT p.*, 
@@ -26,7 +26,7 @@ if ($method == "GET") {
     exit;   
 }
 
-// POST كل العمليات
+// POST → كل العمليات
 if ($method == "POST") {
 
     $action = $data['action'] ?? '';
